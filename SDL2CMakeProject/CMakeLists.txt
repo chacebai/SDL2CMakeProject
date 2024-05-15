@@ -2,8 +2,11 @@
 # project specific logic here.
 #
 
+FILE(GLOB_RECURSE all_source_files "src/*.cpp" "src/*.c")
+FILE(GLOB_RECURSE all_head_files "src/*.hpp" "src*.h")
+
 # Add source to this project's executable.
-add_executable (SDL2CMakeProject "SDL2CMakeProject.cpp" "SDL2CMakeProject.h")
+add_executable (SDL2CMakeProject "SDL2CMakeProject.cpp" "SDL2CMakeProject.h" ${all_head_files} ${all_source_files})
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET SDL2CMakeProject PROPERTY CXX_STANDARD 20)
