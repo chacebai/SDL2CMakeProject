@@ -28,6 +28,8 @@ Window::~Window()
     SDL_DestroyRenderer(m_renderer);
     SDL_DestroyWindow(m_window);
     SDL_Quit();
+    // Free the window
+    Window::g_window = nullptr;
 }
 
 
@@ -51,6 +53,8 @@ void Window::setLayout(ILayout* pLayout)
 
 void Window::Run()
 {
+    SDL_SetWindowOpacity(m_window, 0.8);
+    SDL_SetWindowTitle(m_window, "SDL2 Window");
     // Render creation
     m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
     if (m_renderer == nullptr)
@@ -62,8 +66,7 @@ void Window::Run()
     SDL_RenderClear(m_renderer);
     SDL_RenderPresent(m_renderer);
 
-    SDL_SetWindowTitle(m_window, "SDL2 Window");
-    SDL_ShowCursor(1);
+    SDL_ShowCursor(SDL_ENABLE);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "2");
     SDL_AddEventWatch(Window::resizingEventWatcher, m_window);
 

@@ -103,8 +103,7 @@ private:
             event->window.event == SDL_WINDOWEVENT_RESIZED) {
             SDL_Window* win = SDL_GetWindowFromID(event->window.windowID);
             if (win == (SDL_Window*)data) {
-                SDL_Log("resizing\n");
-
+                SDL_Log("resizing xPos: %d yPos: %d\n", event->window.data1, event->window.data2);
                 SDL_RenderClear(Window::g_window->m_renderer);
                 SDL_RenderCopy(Window::g_window->m_renderer, Window::g_window->m_texture, nullptr, &Window::g_window->m_rect);
                 SDL_RenderPresent(Window::g_window->m_renderer);
